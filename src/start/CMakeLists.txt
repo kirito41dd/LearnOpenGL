@@ -8,3 +8,10 @@ target_link_libraries(HelloTriangle glfw3 glad)
 
 add_executable(HelloTriangle_2 HelloTriangle_2.cpp)
 target_link_libraries(HelloTriangle_2 glfw3 glad)
+
+# 着色器
+add_executable(Shaders_uniform Shaders_uniform.cpp)
+target_link_libraries(Shaders_uniform glfw3 glad)
+
+add_executable(Shaders_2 Shaders_2.cpp)
+target_link_libraries(Shaders_2 glfw3 glad)

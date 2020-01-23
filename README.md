@@ -10,3 +10,7 @@ LearnOpenGL
 ![HelloTriangle](img/HelloTriangle.png)
 * HelloTriangle_2
 ![HelloTriangle_2](img/HelloTriangle_2.png)
+* Shaders_uniform
+![Shaders_uniform](img/Shaders_uniform.gif)
+* Shaders_2
+![Shaders_2](img/Shaders_2.png)

@@ -7,7 +7,9 @@ project(learnopengl)
 include_directories(C:/Program\ Files\ \(x86\)/GLFW/include D:/workspace/glad/include)
 link_directories(C:/Program\ Files\ \(x86\)/GLFW/bin D:/workspace/glad/src)
 
-
+include_directories(./include)
 
 # 子目录
 add_subdirectory(src/start)
+
+add_subdirectory(test)
