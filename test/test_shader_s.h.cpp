@@ -15,9 +15,9 @@ void processInput(GLFWwindow *window);
 
 int main(int argc, char **argv)
 {
-    if (argc != 3)
+    if (argc != 2)
     {
-        printf("usage: %s vertexShaderPath fragmentShaderPath\n",argv[0]);
+        printf("usage: %s shader-dirname\nlike: ./shader/\n",argv[0]);
         exit(0);
     }
 
@@ -50,7 +50,10 @@ int main(int argc, char **argv)
     }
 
     // 着色器
-   Shader ourShader(argv[1], argv[2]);
+    std::string vs,fs;
+    vs = std::string(argv[1]) + "shader.vs";
+    fs = std::string(argv[1]) + "shader.fs";
+    Shader ourShader(vs.c_str(), fs.c_str());
     
 
     // 设置顶点数据 (and buffer(s)) and configure vertex attributes

@@ -14,3 +14,7 @@ LearnOpenGL
 ![Shaders_uniform](img/Shaders_uniform.gif)
 * Shaders_2
 ![Shaders_2](img/Shaders_2.png)
+* Textures
+![Textures](img/Textures.png)
+* Textures_mix
+![Textures_mix](img/Textures_mix.png)

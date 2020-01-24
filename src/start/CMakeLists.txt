@@ -15,3 +15,10 @@ target_link_libraries(Shaders_uniform glfw3 glad)
 
 add_executable(Shaders_2 Shaders_2.cpp)
 target_link_libraries(Shaders_2 glfw3 glad)
+
+# 纹理
+add_executable(Textures Textures.cpp)
+target_link_libraries(Textures glfw3 glad)
+
+add_executable(Textures_mix Textures_mix.cpp)
+target_link_libraries(Textures_mix glfw3 glad)
