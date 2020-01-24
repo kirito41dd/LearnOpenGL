@@ -22,3 +22,7 @@ target_link_libraries(Textures glfw3 glad)
 
 add_executable(Textures_mix Textures_mix.cpp ../../include/stb_image_wrap.cpp)
 target_link_libraries(Textures_mix glfw3 glad)
+
+# 变换
+add_executable(Transformation Transformation.cpp ../../include/stb_image_wrap.cpp)
+target_link_libraries(Transformation glfw3 glad)
