@@ -1,4 +1,4 @@
-// 变换
+// 进入3d
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <learnopengl/shader_s.h>
@@ -53,8 +53,8 @@ int main(int argc, char **argv)
 
     // 编译着色器
     string vs,fs;
-    vs = string(argv[1]) + "transform.vs";
-    fs = string(argv[1]) + "texture_mix.fs";
+    vs = string(argv[1]) + "start3d.vs";
+    fs = string(argv[1]) + "start3d.fs";
     Shader ourShader(vs.c_str(), fs.c_str());
 
     
@@ -168,13 +168,23 @@ int main(int argc, char **argv)
         glBindTexture(GL_TEXTURE_2D, texture2); // 将纹理绑定到相应的纹理单元上
 
         // 创建变换  注意实际变换顺序与阅读顺序相反 ABC   ABCv  因为是左乘
-        glm::mat4 transform = glm::mat4(1.0f); // 确保初始化为单位矩阵
-        transform = glm::scale(transform, glm::vec3(0.8, 0.8, 0.8)); // 缩放
-        transform = glm::translate(transform, glm::vec3(0.5f, -0.5f, 0.0f)); // 往右下角移动
-        transform = glm::rotate(transform, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f)); // 绕z轴旋转  第二个参数可用glm::radians(90.0f)把90度转为弧度
+        glm::mat4 model = glm::mat4(1.0f);
+        glm::mat4 view = glm::mat4(1.0f);
+        glm::mat4 projection = glm::mat4(1.0f);
+        model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f)); // 按轴旋转55度
+        view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f)); // 拉远摄像机
+        projection = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH/(float)SCR_HEIGHT, 0.1f, 100.0f); // 创建一个透视投影矩阵: 视野 宽高比 近平面 远平面距离
+
         // get uniform location
-        unsigned int transformLoc = glGetUniformLocation(ourShader.ID, "transform");
-        glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(transform));
+        unsigned int modelLoc = glGetUniformLocation(ourShader.ID, "model");
+        unsigned int viewLoc  = glGetUniformLocation(ourShader.ID, "view");
+        unsigned int projectiongLoc  = glGetUniformLocation(ourShader.ID, "projection");
+        // pass them to the shaders (3 different ways)
+        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+        glUniformMatrix4fv(viewLoc, 1, GL_FALSE, &view[0][0]);
+        //ourShader.setMat4("projection", projection);
+        glUniformMatrix4fv(projectiongLoc, 1, GL_FALSE, glm::value_ptr(projection)); // 投影矩阵一般不怎么变化，在循环外指定一次就行
+
 
         glBindVertexArray(VAO); 
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0); // 参数： 图元类型 绘制顶点个数 索引的类型 EBO中的偏移量
