@@ -33,3 +33,13 @@ target_link_libraries(Start3d glfw3 glad)
 
 add_executable(More3d More3d.cpp ../../include/stb_image_wrap.cpp)
 target_link_libraries(More3d glfw3 glad)
+
+add_executable(More3d_2 More3d_2.cpp ../../include/stb_image_wrap.cpp)
+target_link_libraries(More3d_2 glfw3 glad)
+
+# 摄像机 Camera
+add_executable(Camera Camera.cpp ../../include/stb_image_wrap.cpp)
+target_link_libraries(Camera glfw3 glad)
+
+add_executable(Camera_move Camera_move.cpp ../../include/stb_image_wrap.cpp)
+target_link_libraries(Camera_move glfw3 glad)

@@ -24,3 +24,9 @@ LearnOpenGL
 ![Start3d](img/Start3d.png)
 * More3d
 ![More3d](img/More3d.gif)
+* More3d_2
+![More3d_2](img/More3d_2.png)
+* Camera
+![Camera](img/Camera.gif)
+* Camera_move
+![Camera_move](img/Camera_move.gif)
