@@ -11,5 +11,6 @@ include_directories(./include)
 
 # 子目录
 add_subdirectory(src/start)
+add_subdirectory(src/lighting)
 
 add_subdirectory(test)
