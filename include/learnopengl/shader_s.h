@@ -119,7 +119,7 @@ public:
     // uniform工具函数 查询一个unform的位置值并设置它的值。
     void setFloat(const std::string &name, float value) const
     {
-        glUniform1i(glGetUniformLocation(ID, name.c_str()), value);
+        glUniform1f(glGetUniformLocation(ID, name.c_str()), value);
     }
 
     // ------------------------------------------------------------------------
