@@ -194,9 +194,15 @@ int main(int argc, char **argv)
         lightingShader.setVec3("viewPos", camera.Position);
 
         // 光照属性
-        lightingShader.setVec3("light.ambient", 0.3f, 0.3f, 0.3f); // note that all light colors are set at full intensity
-        lightingShader.setVec3("light.diffuse", 1.0f, 1.0f, 1.0f);
-        lightingShader.setVec3("light.specular", 0.7f, 0.7f, 0.7f);
+        glm::vec3 lightColor;
+        lightColor.x = sin(glfwGetTime() * 2.0f);
+        lightColor.y = sin(glfwGetTime() * 0.7f);
+        lightColor.z = sin(glfwGetTime() * 1.3f);
+        glm::vec3 diffuseColor = lightColor   * glm::vec3(0.5f); // decrease the influence
+        glm::vec3 ambientColor = diffuseColor * glm::vec3(0.2f); // low influence
+        lightingShader.setVec3("light.ambient", ambientColor);
+        lightingShader.setVec3("light.diffuse", diffuseColor);
+        lightingShader.setVec3("light.specular", 1.0f, 1.0f, 1.0f);
         
 
         // 材质属性  改变它的数值，查看效果

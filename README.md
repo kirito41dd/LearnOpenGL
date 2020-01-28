@@ -35,4 +35,4 @@ LearnOpenGL
 * Basic_lighting
 ![Basic_lighting](img/Basic_lighting.png) 
 * Materials
-![Materials](img/Materials.png) 
+![Materials](img/Materials.gif) 
