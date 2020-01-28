@@ -30,3 +30,7 @@ LearnOpenGL
 ![Camera](img/Camera.gif)
 * Camera_move
 ![Camera_move](img/Camera_move.gif)
+* Color
+![Color](img/Color.png)
+* Basic_lighting
+![Basic_lighting](img/Basic_lighting.png) 
