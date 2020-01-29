@@ -14,6 +14,8 @@ enum Camera_Movement {
     BACKWARD,
     LEFT,
     RIGHT,
+    UP,
+    DOWN,
 };
 
 // 默认设置
@@ -88,6 +90,10 @@ public:
             Position -= Right * velocity;
         if (direction == RIGHT)
             Position += Right * velocity;
+        if (direction == UP)
+            Position += Up * velocity;
+        if (direction == DOWN)
+            Position -= Up * velocity;
     }
 
     // 处理从鼠标输入系统接收的输入。 预期在x和y方向上的偏移值。
