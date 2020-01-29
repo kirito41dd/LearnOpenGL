@@ -13,3 +13,11 @@ target_link_libraries(Materials glfw3 glad)
 # 光照贴图
 add_executable(Lighting_maps Lighting_maps.cpp ../../include/stb_image_wrap.cpp)
 target_link_libraries(Lighting_maps glfw3 glad)
+
+# 平行光
+add_executable(Directional Directional.cpp ../../include/stb_image_wrap.cpp)
+target_link_libraries(Directional glfw3 glad)
+
+# 点光源
+add_executable(Point Point.cpp ../../include/stb_image_wrap.cpp)
+target_link_libraries(Point glfw3 glad)

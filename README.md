@@ -47,4 +47,8 @@ LearnOpenGL
         <td align="center"><img src="img/Materials.gif" width=400 hight=300/><br />Materials
         <td align="center"><img src="img/Lighting_maps.png" width=400 hight=300/><br />Lighting_maps
     </tr>
+    <tr>
+        <td align="center"><img src="img/Directional.png" width=400 hight=300/><br />Directional 平行光
+        <td align="center"><img src="img/Point.png" width=400 hight=300/><br />Point 点光源
+    </tr>
 </table>
