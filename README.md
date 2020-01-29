@@ -45,5 +45,6 @@ LearnOpenGL
     </tr>
     <tr>
         <td align="center"><img src="img/Materials.gif" width=400 hight=300/><br />Materials
+        <td align="center"><img src="img/Lighting_maps.png" width=400 hight=300/><br />Lighting_maps
     </tr>
 </table>
