@@ -55,4 +55,7 @@ LearnOpenGL
         <td align="center"><img src="img/Spot.png" width=400 hight=300/><br />Spot 聚光
         <td align="center"><img src="img/Spot_soft.png" width=400 hight=300/><br />Spot_soft 边缘软化
     </tr>
+    <tr>
+        <td align="center"><img src="img/Multiple_lights.png" width=400 hight=300/><br />Multiple_lights 多光源
+    </tr>
 </table>
