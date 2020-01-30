@@ -21,3 +21,11 @@ target_link_libraries(Directional glfw3 glad)
 # 点光源
 add_executable(Point Point.cpp ../../include/stb_image_wrap.cpp)
 target_link_libraries(Point glfw3 glad)
+
+# 聚光
+add_executable(Spot Spot.cpp ../../include/stb_image_wrap.cpp)
+target_link_libraries(Spot glfw3 glad)
+
+# 聚光 边缘软化
+add_executable(Spot_soft Spot_soft.cpp ../../include/stb_image_wrap.cpp)
+target_link_libraries(Spot_soft glfw3 glad)

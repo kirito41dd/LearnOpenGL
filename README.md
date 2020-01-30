@@ -51,4 +51,8 @@ LearnOpenGL
         <td align="center"><img src="img/Directional.png" width=400 hight=300/><br />Directional 平行光
         <td align="center"><img src="img/Point.png" width=400 hight=300/><br />Point 点光源
     </tr>
+    <tr>
+        <td align="center"><img src="img/Spot.png" width=400 hight=300/><br />Spot 聚光
+        <td align="center"><img src="img/Spot_soft.png" width=400 hight=300/><br />Spot_soft 边缘软化
+    </tr>
 </table>

@@ -1,4 +1,4 @@
-// 点光源
+// 聚光 模拟手电筒 边缘软化
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <stb_image.h> 
@@ -34,7 +34,7 @@ float deltaTime = 0.0f;
 float lastFrame = 0.0f;
 
 // lighting
-glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
+// glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 
 int main(int argc, char **argv)
 {
@@ -88,7 +88,7 @@ int main(int argc, char **argv)
     // ------------------------------------
     string shaderPath = root + "shader/lighting/";
     string vs,fs;
-    vs = shaderPath + "point.vs"; fs = shaderPath + "point.fs";
+    vs = shaderPath + "spot.vs"; fs = shaderPath + "spot_soft.fs";
     Shader lightingShader(vs.c_str(), fs.c_str());
     vs = shaderPath + "lamp.vs"; fs = shaderPath + "lamp.fs";
     Shader lampShader(vs.c_str(), fs.c_str());
@@ -216,20 +216,23 @@ int main(int argc, char **argv)
 
         // 设置时一定要激活着色器
         lightingShader.use();
-        lightingShader.setVec3("light.position",  lightPos);
+        lightingShader.setVec3("light.position", camera.Position);
+        lightingShader.setVec3("light.direction", camera.Front);
+        lightingShader.setFloat("light.cutOff", glm::cos(glm::radians(12.5f))); // 聚光角度大小，控制手电筒光柱
+        lightingShader.setFloat("light.outerCutOff", glm::cos(glm::radians(17.5f)));
         lightingShader.setVec3("viewPos", camera.Position);
 
+
         // 光照属性
-        lightingShader.setVec3("light.ambient", 0.2f, 0.2f, 0.2f);
-        lightingShader.setVec3("light.diffuse", 0.5f, 0.5f, 0.5f);
+        lightingShader.setVec3("light.ambient", 0.1f, 0.1f, 0.1f);
+        lightingShader.setVec3("light.diffuse", 0.8f, 0.8f, 0.8f);
         lightingShader.setVec3("light.specular", 1.0f, 1.0f, 1.0f);
         lightingShader.setFloat("light.constant", 1.0f);
         lightingShader.setFloat("light.linear", 0.09f);
         lightingShader.setFloat("light.quadratic", 0.032f);
-        
 
         // 材质属性  改变它的数值，查看效果
-        lightingShader.setFloat("material.shininess", 64.0f);
+        lightingShader.setFloat("material.shininess", 32.0f);
 
         // view/projection transformations
         glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
@@ -264,13 +267,13 @@ int main(int argc, char **argv)
 
 
         // also draw the lamp object
-        lampShader.use();
-        lampShader.setMat4("projection", projection);
-        lampShader.setMat4("view", view);
-        model = glm::mat4(1.0f);
-        model = glm::translate(model, lightPos);
-        model = glm::scale(model, glm::vec3(0.2f)); // a smaller cube
-        lampShader.setMat4("model", model);
+        // lampShader.use();
+        // lampShader.setMat4("projection", projection);
+        // lampShader.setMat4("view", view);
+        // model = glm::mat4(1.0f);
+        // model = glm::translate(model, lightPos);
+        // model = glm::scale(model, glm::vec3(0.2f)); // a smaller cube
+        // lampShader.setMat4("model", model);
 
         glBindVertexArray(lightVAO);
         glDrawArrays(GL_TRIANGLES, 0, 36);
