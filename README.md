@@ -59,3 +59,11 @@ LearnOpenGL
         <td align="center"><img src="img/Multiple_lights.png" width=400 hight=300/><br />Multiple_lights 多光源
     </tr>
 </table>
+
+### 模型(model)
+<table>
+    <tr>
+        <td align="center"><img src="img/Model_loading.png" width=400 hight=300/><br />Model_loading 模型加载
+    </tr>
+
+</table>
