@@ -367,7 +367,7 @@ unsigned int loadTexture(const char *path)
         GLenum format;
         if (nrComponents == 1)
             format = GL_RED;
-        else if (nrComponents == 2)
+        else if (nrComponents == 3)
             format = GL_RGB;
         else if (nrComponents == 4)
             format = GL_RGBA;
