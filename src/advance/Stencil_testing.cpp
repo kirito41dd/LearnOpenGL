@@ -1,4 +1,5 @@
-// 深度测试
+// 模板测试   实现物体轮廓  可以用来实现游戏内物体选中
+// 当片段着色器处理完一个片段之后，模板测试(Stencil Test)会开始执行，和深度测试一样，它也可能会丢弃片段。接下来，被保留的片段会进入深度测试
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <stb_image.h> 
@@ -82,22 +83,33 @@ int main(int argc, char **argv)
     // configure global opengl state
     // -----------------------------
     glEnable(GL_DEPTH_TEST);
-    // glDepthFunc(GL_ALWAYS); // 总是通过深度测试，与glDisable(GL_DEPTH_TEST)具有相同的效果
-    // GL_ALWAYS 	永远通过深度测试
-    // GL_NEVER 	永远不通过深度测试
-    // GL_LESS 	在片段深度值小于缓冲的深度值时通过测试
-    // GL_EQUAL 	在片段深度值等于缓冲区的深度值时通过测试
-    // GL_LEQUAL 	在片段深度值小于等于缓冲区的深度值时通过测试
-    // GL_GREATER 	在片段深度值大于缓冲区的深度值时通过测试
-    // GL_NOTEQUAL 	在片段深度值不等于缓冲区的深度值时通过测试
-    // GL_GEQUAL 	在片段深度值大于等于缓冲区的深度值时通过测试
+    glEnable(GL_STENCIL_TEST); // 开启模板测试
+    glStencilFunc(GL_NOTEQUAL, 1, 0xFF); // 片段模板值不等于1就通过测试
+    // func：设置模板测试函数  可选 GL_NEVER、GL_LESS、GL_LEQUAL、GL_GREATER、GL_GEQUAL、GL_EQUAL、GL_NOTEQUAL和GL_ALWAYS
+    // ref：设置了模板测试的参考值(Reference Value) 
+    // mask：设置一个掩码，它将会与参考值和储存的模板值在测试比较它们之前进行与(AND)运算
+    glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE); // 如果其中的一个测试失败了，我们什么都不做 如果模板测试和深度测试都通过 储存的模板值设置为参考值
+    // sfail：模板测试失败时采取的行为。
+    // dpfail：模板测试通过，但深度测试失败时采取的行为。
+    // dppass：模板测试和深度测试都通过时采取的行为。
+    // GL_KEEP 	保持当前储存的模板值
+    // GL_ZERO 	将模板值设置为0
+    // GL_REPLACE 	将模板值设置为glStencilFunc函数设置的ref值
+    // GL_INCR 	如果模板值小于最大值则将模板值加1
+    // GL_INCR_WRAP 	与GL_INCR一样，但如果模板值超过了最大值则归零
+    // GL_DECR 	如果模板值大于最小值则将模板值减1
+    // GL_DECR_WRAP 	与GL_DECR一样，但如果模板值小于0则将其设置为最大值
+    // GL_INVERT 	按位翻转当前的模板缓冲值
+
 
     // build and compile our shader zprogram
     // ------------------------------------
     string shaderPath = root + "shader/advance/";
     string vs,fs;
-    vs = shaderPath + "depth_testing.vs"; fs = shaderPath + "depth_testing.fs";
+    vs = shaderPath + "Stencil_testing.vs"; fs = shaderPath + "Stencil_testing.fs";
     Shader shader(vs.c_str(), fs.c_str());
+    fs = shaderPath + "Stencil_testing_single_color.fs";
+    Shader shaderSingleColor(vs.c_str(), fs.c_str());
 
     // set up vertex data (and buffer(s)) and configure vertex attributes
     // ------------------------------------------------------------------
@@ -215,18 +227,35 @@ int main(int argc, char **argv)
         // render
         // ------
         glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
         // glDepthMask(GL_FALSE);
         // 在某些情况下你会需要对所有片段都执行深度测试并丢弃相应的片段，但不希望更新深度缓冲。
         // 基本上来说，你在使用一个只读的(Read-only)深度缓冲。
         // OpenGL允许我们禁用深度缓冲的写入，只需要设置它的深度掩码(Depth Mask)设置为GL_FALSE就可以了：
 
-        shader.use();
+        
         glm::mat4 model = glm::mat4(1.0f);
         glm::mat4 view = camera.GetViewMatrix();
         glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+        shaderSingleColor.use();
+        shaderSingleColor.setMat4("view", view);
+        shaderSingleColor.setMat4("projection", projection);
+        shader.use();
         shader.setMat4("view", view);
         shader.setMat4("projection", projection);
+        //正常绘制地板，但不要将地板写入模具缓冲区，我们只关心容器。我们将它的掩码设置为0x00，以避免写入模板缓冲区。
+        // floor
+        glStencilMask(0x00);
+        glBindVertexArray(planeVAO);
+        glBindTexture(GL_TEXTURE_2D, floorTexture);
+        shader.setMat4("model", glm::mat4(1.0f));
+        glDrawArrays(GL_TRIANGLES, 0, 6);
+        glBindVertexArray(0);
+
+        
+        // 1. 渲染通过，正常绘制对象，写入模具缓冲区
+        glStencilFunc(GL_ALWAYS, 1, 0xFF);
+        glStencilMask(0xFF);
         // cubes
         glBindVertexArray(cubeVAO);
         glActiveTexture(GL_TEXTURE0);
@@ -238,12 +267,30 @@ int main(int argc, char **argv)
         model = glm::translate(model, glm::vec3(2.0f, 0.0f, 0.0f));
         shader.setMat4("model", model);
         glDrawArrays(GL_TRIANGLES, 0, 36);
-        // floor
-        glBindVertexArray(planeVAO);
-        glBindTexture(GL_TEXTURE_2D, floorTexture);
-        shader.setMat4("model", glm::mat4(1.0f));
-        glDrawArrays(GL_TRIANGLES, 0, 6);
+        
+        // 2. 绘制放大的版本，禁用模板写入，关闭深度测试，之前深度缓冲为内容1,放大版在不是1的地方绘制，就实现了轮廓
+        glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+        glStencilMask(0x00);
+        glDisable(GL_DEPTH_TEST);
+        float scale = 1.1;
+        shaderSingleColor.use();
+        // cubes
+        glBindVertexArray(cubeVAO);
+        glBindTexture(GL_TEXTURE_2D, cubeTexture);
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(-1.0f, 0.0f, -1.0f));
+        model = glm::scale(model, glm::vec3(scale, scale, scale));
+        shaderSingleColor.setMat4("model", model);
+        glDrawArrays(GL_TRIANGLES, 0, 36);
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(2.0f, 0.0f, 0.0f));
+        model = glm::scale(model, glm::vec3(scale, scale, scale));
+        shaderSingleColor.setMat4("model", model);
+        glDrawArrays(GL_TRIANGLES, 0, 36);
         glBindVertexArray(0);
+
+        glStencilMask(0xFF); // 恢复
+        glEnable(GL_DEPTH_TEST);
 
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)

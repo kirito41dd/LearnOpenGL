@@ -72,6 +72,7 @@ LearnOpenGL
 <table>
     <tr>
         <td align="center"><img src="img/Depth_testing.png" width=400 hight=300/><br />Depth_testing 深度测试
+        <td align="center"><img src="img/Stencil_testing.png" width=400 hight=300/><br />Stencil_testing 模板测试_轮廓线
     </tr>
 
 </table>
