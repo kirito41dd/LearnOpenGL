@@ -64,6 +64,7 @@ LearnOpenGL
 <table>
     <tr>
         <td align="center"><img src="img/Model_loading.png" width=400 hight=300/><br />Model_loading 模型加载
+        <td align="center"><img src="img/Model_girl.png" width=400 hight=300/><br />Model_girl
     </tr>
 
 </table>
