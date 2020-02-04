@@ -8,3 +8,7 @@ target_link_libraries(Stencil_testing glfw3 glad)
 # 混合 丢弃片段
 add_executable(Blending_discard Blending_discard.cpp ../../include/stb_image_wrap.cpp)
 target_link_libraries(Blending_discard glfw3 glad)
+
+# 混合 半透明
+add_executable(Blending_translucent Blending_translucent.cpp ../../include/stb_image_wrap.cpp)
+target_link_libraries(Blending_translucent glfw3 glad)

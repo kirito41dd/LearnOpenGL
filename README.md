@@ -77,7 +77,7 @@ LearnOpenGL
     </tr>
     <tr>
         <td align="center"><img src="img/Blending_discard.png" width=400 hight=300/><br />Blending_discard 混合 丢弃透明片段
-        
+        <td align="center"><img src="img/Blending_translucent.png" width=400 hight=300/><br />Blending_translucent 混合 半透明片段
     </tr>
 
 </table>
