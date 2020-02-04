@@ -14,11 +14,12 @@ void processInput(GLFWwindow *window);
 
 int main(int argc, char **argv)
 {
-    if (argc != 3)
+    if (argc != 2)
     {
-        printf("usage: %s shader-dirname img-dirname\nlike: ./shader/ ./img/\n",argv[0]);
+        cout << "usage: " << argv[0] << " path/to/project/" << endl;
         exit(0);
     }
+    string root = argv[1];
 
     glfwInit(); // 初始化GLFW库
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); // 配置主版本号
@@ -50,8 +51,8 @@ int main(int argc, char **argv)
 
     // 编译着色器
     string vs,fs;
-    vs = string(argv[1]) + "texture.vs";
-    fs = string(argv[1]) + "texture.fs";
+    vs = root + "shader/start/texture.vs";
+    fs = root + "shader/start/texture.fs";
     Shader ourShader(vs.c_str(), fs.c_str());
 
     
@@ -113,7 +114,7 @@ int main(int argc, char **argv)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);  // 放大时
     // 加载图像，创建纹理并生成 mipmap(贴图)
     int width, height, nrChannels;
-    string imgfile; imgfile = string(argv[2]) + "container.jpg";
+    string imgfile; imgfile = root + "img/container.jpg";
     unsigned char *data = stbi_load(imgfile.c_str(), &width, &height, &nrChannels, 0);
     if (data == NULL)
     {

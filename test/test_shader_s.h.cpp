@@ -17,9 +17,10 @@ int main(int argc, char **argv)
 {
     if (argc != 2)
     {
-        printf("usage: %s shader-dirname\nlike: ./shader/\n",argv[0]);
+        cout << "usage: " << argv[0] << " path/to/project/" << endl;
         exit(0);
     }
+    string root = argv[1];
 
     glfwInit(); // 初始化GLFW库
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); // 配置主版本号
@@ -51,8 +52,8 @@ int main(int argc, char **argv)
 
     // 着色器
     std::string vs,fs;
-    vs = std::string(argv[1]) + "shader.vs";
-    fs = std::string(argv[1]) + "shader.fs";
+    vs = root + "shader/start/shader.vs";
+    fs = root + "shader/start/shader.fs";
     Shader ourShader(vs.c_str(), fs.c_str());
     
 
