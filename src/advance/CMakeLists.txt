@@ -16,3 +16,7 @@ target_link_libraries(Blending_translucent glfw3 glad)
 # 面剔除
 add_executable(FaceCulling FaceCulling.cpp ../../include/stb_image_wrap.cpp)
 target_link_libraries(FaceCulling glfw3 glad)
+
+# 帧缓冲
+add_executable(Framebuffers Framebuffers.cpp ../../include/stb_image_wrap.cpp)
+target_link_libraries(Framebuffers glfw3 glad)
