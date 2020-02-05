@@ -28,3 +28,11 @@ target_link_libraries(Framebuffers_post_processing glfw3 glad)
 # 立方体贴图 天空盒
 add_executable(Cubemaps_skybox Cubemaps_skybox.cpp ../../include/stb_image_wrap.cpp)
 target_link_libraries(Cubemaps_skybox glfw3 glad)
+
+# 立方体贴图 反射
+add_executable(Cubemaps_reflection Cubemaps_reflection.cpp ../../include/stb_image_wrap.cpp)
+target_link_libraries(Cubemaps_reflection glfw3 glad)
+
+# 立方体贴图 折射
+add_executable(Cubemaps_refraction Cubemaps_refraction.cpp ../../include/stb_image_wrap.cpp)
+target_link_libraries(Cubemaps_refraction glfw3 glad)
