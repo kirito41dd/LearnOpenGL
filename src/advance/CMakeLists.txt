@@ -20,3 +20,7 @@ target_link_libraries(FaceCulling glfw3 glad)
 # 帧缓冲
 add_executable(Framebuffers Framebuffers.cpp ../../include/stb_image_wrap.cpp)
 target_link_libraries(Framebuffers glfw3 glad)
+
+# 帧缓冲 后期处理
+add_executable(Framebuffers_post_processing Framebuffers_post_processing.cpp ../../include/stb_image_wrap.cpp)
+target_link_libraries(Framebuffers_post_processing glfw3 glad)

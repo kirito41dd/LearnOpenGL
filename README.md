@@ -83,5 +83,8 @@ LearnOpenGL
         <td align="center"><img src="img/FaceCulling.png" width=400 hight=300/><br />FaceCulling 面剔除 
         <td align="center"><img src="img/Framebuffers.png" width=400 hight=300/><br />Framebuffers 帧缓冲_渲染到纹理 
     </tr>
+    <tr>
+        <td align="center"><img src="img/Framebuffers_post_processing.png" width=400 hight=300/><br />Framebuffers_post_processing 帧缓冲_后期处理 
+    </tr>
 
 </table>
