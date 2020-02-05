@@ -24,3 +24,7 @@ target_link_libraries(Framebuffers glfw3 glad)
 # 帧缓冲 后期处理
 add_executable(Framebuffers_post_processing Framebuffers_post_processing.cpp ../../include/stb_image_wrap.cpp)
 target_link_libraries(Framebuffers_post_processing glfw3 glad)
+
+# 立方体贴图 天空盒
+add_executable(Cubemaps_skybox Cubemaps_skybox.cpp ../../include/stb_image_wrap.cpp)
+target_link_libraries(Cubemaps_skybox glfw3 glad)

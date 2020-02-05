@@ -85,6 +85,7 @@ LearnOpenGL
     </tr>
     <tr>
         <td align="center"><img src="img/Framebuffers_post_processing.png" width=400 hight=300/><br />Framebuffers_post_processing 帧缓冲_后期处理 
+        <td align="center"><img src="img/Cubemaps_skybox.png" width=400 hight=300/><br />Cubemaps_skybox 立方体贴图_天空盒 
     </tr>
 
 </table>
