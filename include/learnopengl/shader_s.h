@@ -18,8 +18,15 @@ public:
     // 程序ID
     unsigned int ID;
     
-    // 构造器读取并构建着色器
+    // 构造器但不编译
+    Shader(){}
+    // 构造并编译
     Shader(const GLchar *vertexPath, const GLchar *fragmentPath, const char* geometryPath = nullptr)
+    {
+        Compile(vertexPath, fragmentPath, geometryPath);
+    }
+
+    void Compile(const GLchar *vertexPath, const GLchar *fragmentPath, const char* geometryPath = nullptr)
     {
         // 读取源码
         std::string vertexCode;
@@ -59,7 +66,7 @@ public:
         }
         catch(std::ifstream::failure e)
         {
-            std::cerr << "file not successfully read: " << e.what() << std::endl;
+            std::cout << "file not successfully read: " << e.what() << std::endl;
         }
         const char *vShaderCode = vertexCode.c_str();
         const char *fShaderCode = fragmentCode.c_str();

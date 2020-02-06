@@ -18,5 +18,6 @@ add_subdirectory(src/start)
 add_subdirectory(src/lighting)
 add_subdirectory(src/model)
 add_subdirectory(src/advance)
+add_subdirectory(src/breakout)
 
 add_subdirectory(test)
