@@ -53,6 +53,7 @@ int main(int argc, char **argv)
     glEnable(GL_CULL_FACE); // 开启面剔除
     glEnable(GL_BLEND); // 开启混合
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glEnable(GL_MULTISAMPLE);
 
 
     Breakout.Init();

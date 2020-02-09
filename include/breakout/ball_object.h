@@ -7,12 +7,16 @@
 #include <breakout/texture.h>
 #include <breakout/sprite_renderer.h>
 #include <breakout/game_object.h>
+#include <breakout/power_up.h>
+
 
 class BallObject : public GameObject
 {
 public:
     GLfloat Radius; // 半径
     GLboolean Stuck; // 粘住
+    GLboolean Sticky, PassThrough; // powerup开启的功能， 黏在板子上一次 穿透
+
 
     BallObject();
     BallObject(glm::vec2 pos, GLfloat radius, glm::vec2 velocity, Texture2D sprite);

@@ -33,6 +33,7 @@ Texture2D& ResourceManager::GetTexture(std::string name)
     return Textures[name];
 }
 
+
 void ResourceManager::Clear()
 {
     for (std::map<std::string, Shader>::iterator it = Shaders.begin(); it != Shaders.end(); ++it)
