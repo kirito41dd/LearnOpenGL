@@ -5,6 +5,12 @@ LearnOpenGL
 
 ## 程序展示
 
+<!--
+<video width="320" height="240" controls>
+  <source src="audio/test.mp4" type="video/mp4">
+</video>-->
+
+
 
 ### 入门(start)
 <table>
@@ -92,4 +98,11 @@ LearnOpenGL
         <td align="center"><img src="img/Cubemaps_refraction.png" width=400 hight=300/><br />Cubemaps_refraction 立方体贴图_折射 
     </tr>
 
+</table>
+
+### breakout
+<table>
+    <tr>
+        <td align="center"><img src="img/breakout.gif" width=400 hight=300/><br />breakout(截图帧率低，效果没那么恐怖)
+    </tr>
 </table>

@@ -6,6 +6,7 @@
 #include <breakout/particle_generator.h>
 #include <breakout/post_processor.h>
 //#include <irrKlang.h>
+//#include <windows.h>
 
 #include <algorithm>
 #include <iostream>
@@ -22,7 +23,7 @@ GLfloat         ShakeTime = 0.0f; // 晃动时间
 
 // 声音
 //irrklang::ISoundEngine *SoundEngine;
-
+//HMODULE irrmod;
 
 Game::Game(GLuint width, GLuint height)
     : State(GAME_ACTIVE),
@@ -99,9 +100,15 @@ void Game::Init()
     glm::vec2 ballPos = playerPos + glm::vec2(PLAYER_SIZE.x / 2 - BALL_RADIUS, -BALL_RADIUS * 2);
     Ball = new BallObject(ballPos, BALL_RADIUS, BALL_VELOCITY, ResourceManager::GetTexture("face"));
     // 初始化引擎 加载声音
-//    SoundEngine = irrklang::createIrrKlangDevice();
+//    irrmod =  LoadLibraryW(L"D:\\workspace\\irrKlang-64bit-1.6.0\\bin\\winx64-visualStudio\\irrKlang.dll");
+//    FARPROC cp =  GetProcAddress(irrmod, "?createIrrKlangDevice@irrklang@@YAPEAVISoundEngine@1@W4E_SOUND_OUTPUT_DRIVER@1@HPEBD1@Z");
+//    using namespace irrklang;
+//    typedef ISoundEngine*  (*crp)( E_SOUND_OUTPUT_DRIVER,int options,const char*,const char*);
+//    crp c = (crp)cp;
+//    SoundEngine = c(irrklang::ESOD_AUTO_DETECT, irrklang::ESEO_DEFAULT_OPTIONS, NULL, IRR_KLANG_VERSION);
 //    SoundEngine->addSoundSourceFromFile("audio/breakout.mp3");
 //    SoundEngine->play2D("audio/breakout.mp3");
+
 
 
 }
@@ -350,8 +357,8 @@ void Game::ResetLevel()
 
 void Game::ResetPlayer()
 {
-    Player->Size = PLAYER_SIZE;
-    Player->Position = glm::vec2(this->Width / 2 - PLAYER_SIZE.x / 2, this->Height - PLAYER_SIZE.y);
+    //Player->Size = PLAYER_SIZE;
+    //Player->Position = glm::vec2(this->Width / 2 - PLAYER_SIZE.x / 2, this->Height - PLAYER_SIZE.y);
     Ball->Reset(Player->Position + glm::vec2(PLAYER_SIZE.x / 2 - BALL_RADIUS, -(BALL_RADIUS * 2)), BALL_VELOCITY);
 }
 
@@ -362,13 +369,13 @@ static bool shouldSpawn(int chance)
 }
 void Game::SpawnPowerUps(GameObject &block)
 {   // 生成道具
-    if (shouldSpawn(45))
+    if (shouldSpawn(5))
         this->PowerUps.push_back(PowerUp("speed", glm::vec3(0.5f, 0.5f, 1.0f), 0.0f, block.Position, ResourceManager::GetTexture("powerup_speed")));
-    if (shouldSpawn(45))
+    if (shouldSpawn(5))
         this->PowerUps.push_back(PowerUp("sticky", glm::vec3(1.0f, 0.5f, 1.0f), 20.0f, block.Position, ResourceManager::GetTexture("powerup_sticky")));
-    if (shouldSpawn(45))
+    if (shouldSpawn(5))
         this->PowerUps.push_back(PowerUp("pass-through", glm::vec3(0.5f, 1.0f, 0.5f), 10.0f, block.Position, ResourceManager::GetTexture("powerup_passthrough")));
-    if (shouldSpawn(45))
+    if (shouldSpawn(5))
         this->PowerUps.push_back(PowerUp("pad-size-increase", glm::vec3(1.0f, 0.6f, 0.4), 0.0f, block.Position, ResourceManager::GetTexture("powerup_increase")));
     if (shouldSpawn(15)) // 减益效果的道具生成几率更大
         this->PowerUps.push_back(PowerUp("confuse", glm::vec3(1.0f, 0.3f, 0.3f), 10.0f, block.Position, ResourceManager::GetTexture("powerup_confuse")));
