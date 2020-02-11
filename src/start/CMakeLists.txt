@@ -43,3 +43,7 @@ target_link_libraries(Camera glfw3 glad)
 
 add_executable(Camera_move Camera_move.cpp ../../include/stb_image_wrap.cpp)
 target_link_libraries(Camera_move glfw3 glad)
+
+# 渲染文本
+add_executable(RenderText RenderText.cpp)
+target_link_libraries(RenderText glfw3 glad freetype)

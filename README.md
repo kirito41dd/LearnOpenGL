@@ -36,6 +36,7 @@ LearnOpenGL
     </tr>
     <tr>
         <td align="center"><img src="img/Camera_move.gif" width=400 hight=300/><br />Camera_move
+        <td align="center"><img src="img/RenderText.png" width=400 hight=300/><br />RenderText
     </tr>
 </table>
 
